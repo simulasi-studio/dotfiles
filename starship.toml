@@ -1,0 +1,121 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Global prompt format
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$line_break\
+$character"""
+
+right_format = """
+$lua\
+$hostname\
+$nodejs\
+$package\
+$python\
+$status\
+$os\
+$battery\
+$time"""
+
+# Set global command timeout (in milliseconds)
+command_timeout = 1000
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Configure directory display with Solarized Dark colors
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+format = "[$path]($style) "
+style = "#6c71c4"
+
+# customize prompt character with solarized dark colors
+[character]
+success_symbol = "[❯](#859900)"  # Green
+error_symbol = "[❯](#dc322f)"    # Red
+vimcmd_symbol = "[❮](#268bd2)"   # Blue
+
+# Show command duration only if it takes longer than 2 seconds
+[cmd_duration]
+min_time = 2000
+format = "took [$duration]($style) "
+style = "#b58900"  # Yellow
+
+# Line break for better readability
+# [line_break]
+# disabled = false # Redundant, remove or set to true to disable
+
+[time]
+disabled = false
+format = "[ $time]($style)"
+time_format = "%R"
+utc_time_offset = "local"
+style = "italic dimmed #268bd2"
+
+[battery]
+format = "[ $percentage $symbol]($style)"
+full_symbol = "█"
+charging_symbol = "[↑](italic bold green)"
+discharging_symbol = "↓"
+unknown_symbol = "░"
+empty_symbol = "▃"
+
+[[battery.display]]
+threshold = 40
+style = "bold dimmed #dc322f"
+
+[[battery.display]]
+threshold = 70
+style = " dimmed #c671c4"
+
+[[battery.display]]
+threshold = 100
+style = " dimmed #b58900"
+
+# Display Node.js version when relevant
+[nodejs]
+format = " [⬢ $version](#2aa198) "  # Cyan
+
+[python]
+format = " [py](bold) [${symbol}${version}]($style)"
+symbol = "[](bold bright-blue)⌊ "
+version_format = "${raw}"
+style = "bold bright-yellow"
+
+# Git branch color
+[git_branch]
+format = "[$symbol$branch]($style) "
+style = "#268bd2"  # Blue
+symbol = " "
+
+# Git status color
+[git_status]
+format = "([$all_status$ahead_behind]($style))"
+style = "#dc322f"  # Red
+
+[lua]
+format = "[lua](bold) [${symbol}${version}]($style)"
+version_format = "${raw}"
+symbol = " "
+style = "bold #268bd2"
+
+[package]
+format = " [pkg](italic) [$symbol$version]($style)"
+version_format = "${raw}"
+symbol = "◨ "
+style = " yellow bold"
+
+# Username with Solarized Dark theme
+[username]
+style_user = "#b58900"  # Yellow
+style_root = "#dc322f"  # Red
+format = "[$user:]($style) "
+show_always = true
